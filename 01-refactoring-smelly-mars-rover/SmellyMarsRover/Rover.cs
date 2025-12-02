@@ -11,6 +11,11 @@ namespace SmellyMarsRover
         public Rover(int x, int y, string direction)
         {
             SetDirection(direction);
+            SetCoordinates(x, y);
+        }
+
+        private void SetCoordinates(int x, int y)
+        {
             _y = y;
             _x = x;
         }
@@ -80,19 +85,19 @@ namespace SmellyMarsRover
 
                     if (IsFacingNorth())
                     {
-                        _y += displacement;
+                        SetCoordinates(_x, _y + displacement);
                     }
                     else if (IsFacingSouth())
                     {
-                        _y -= displacement;
+                        SetCoordinates(_x, _y - displacement);
                     }
                     else if (_direction.IsFacingWest())
                     {
-                        _x -= displacement;
+                        SetCoordinates(_x - displacement, _y);
                     }
                     else
                     {
-                        _x += displacement;
+                        SetCoordinates(_x + displacement, _y);
                     }
                 }
             }
