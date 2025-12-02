@@ -73,19 +73,19 @@ namespace SmellyMarsRover
 
                     if (IsFacingNorth())
                     {
-                        _coordinates = new Coordinates(_coordinates.x, _coordinates.y + displacement);
+                        _coordinates = new Coordinates(_coordinates.X, _coordinates.Y + displacement);
                     }
                     else if (IsFacingSouth())
                     {
-                        _coordinates = new Coordinates(_coordinates.x, _coordinates.y - displacement);
+                        _coordinates = new Coordinates(_coordinates.X, _coordinates.Y - displacement);
                     }
                     else if (_direction.IsFacingWest())
                     {
-                        _coordinates = new Coordinates(_coordinates.x - displacement, _coordinates.y);
+                        _coordinates = new Coordinates(_coordinates.X - displacement, _coordinates.Y);
                     }
                     else
                     {
-                        _coordinates = new Coordinates(_coordinates.x + displacement, _coordinates.y);
+                        _coordinates = new Coordinates(_coordinates.X + displacement, _coordinates.Y);
                     }
                 }
             }
@@ -93,12 +93,12 @@ namespace SmellyMarsRover
 
         private bool IsFacingSouth()
         {
-            return _direction._direction.Equals("S");
+            return _direction.direction.Equals("S");
         }
 
         private bool IsFacingNorth()
         {
-            return _direction._direction.Equals("N");
+            return _direction.direction.Equals("N");
         }
 
         public override bool Equals(object obj)
@@ -125,44 +125,13 @@ namespace SmellyMarsRover
         }
     }
 
-    internal record Coordinates(int x, int y);
-
-    internal class Direction
+    public record Direction(string direction)
     {
-        public readonly string _direction;
-
-        public Direction(string direction)
-        {
-            _direction = direction;
-            
-        }
-
-        protected bool Equals(Direction other)
-        {
-            return _direction == other._direction;
-        }
-
-        public override bool Equals(object obj)
-        {
-            if (obj is null) return false;
-            if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != GetType()) return false;
-            return Equals((Direction)obj);
-        }
-
-        public override int GetHashCode()
-        {
-            return (_direction != null ? _direction.GetHashCode() : 0);
-        }
-
-        public override string ToString()
-        {
-            return $"{nameof(_direction)}: {_direction}";
-        }
-
         public bool IsFacingWest()
         {
-            return this._direction.Equals("W");
+            return this.direction.Equals("W");
         }
     }
+
+    internal record Coordinates(int X, int Y);
 }
