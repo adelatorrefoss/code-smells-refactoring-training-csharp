@@ -7,6 +7,7 @@ namespace SmellyMarsRover
         private int _y;
         private int _x;
         private Direction _direction;
+        private Coordinates _coordinates;
 
         public Rover(int x, int y, string direction)
         {
@@ -18,6 +19,7 @@ namespace SmellyMarsRover
         {
             _y = y;
             _x = x;
+            _coordinates = new Coordinates(_x, _y);
         }
 
         private void SetDirection(string direction)
@@ -123,19 +125,21 @@ namespace SmellyMarsRover
 
         protected bool Equals(Rover other)
         {
-            return _y == other._y && _x == other._x && Equals(_direction, other._direction);
+            return Equals(_direction, other._direction) && Equals(_coordinates, other._coordinates);
         }
 
         public override int GetHashCode()
         {
-            return HashCode.Combine(_y, _x, _direction);
+            return HashCode.Combine(_direction, _coordinates);
         }
 
         public override string ToString()
         {
-            return $"{nameof(_y)}: {_y}, {nameof(_x)}: {_x}, {nameof(_direction)}: {_direction}";
+            return $"{nameof(_direction)}: {_direction}, {nameof(_coordinates)}: {_coordinates}";
         }
     }
+
+    internal record Coordinates(int x, int y);
 
     internal class Direction
     {
