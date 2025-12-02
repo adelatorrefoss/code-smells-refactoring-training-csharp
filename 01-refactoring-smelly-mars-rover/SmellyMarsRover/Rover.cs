@@ -85,21 +85,23 @@ namespace SmellyMarsRover
 
                     var displacement = displacement1;
 
+                    var newX = _coordinates.x;
+                    var newY = _coordinates.y;
                     if (IsFacingNorth())
                     {
-                        SetCoordinates(_x, _y + displacement);
+                        SetCoordinates(newX, newY + displacement);
                     }
                     else if (IsFacingSouth())
                     {
-                        SetCoordinates(_x, _y - displacement);
+                        SetCoordinates(newX, newY - displacement);
                     }
                     else if (_direction.IsFacingWest())
                     {
-                        SetCoordinates(_x - displacement, _y);
+                        SetCoordinates(newX - displacement, newY);
                     }
                     else
                     {
-                        SetCoordinates(_x + displacement, _y);
+                        SetCoordinates(newX + displacement, newY);
                     }
                 }
             }
