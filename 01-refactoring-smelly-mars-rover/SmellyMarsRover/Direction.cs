@@ -2,7 +2,7 @@ using System;
 
 namespace SmellyMarsRover;
 
-public record Direction(string direction)
+public abstract record Direction(string direction)
 {
     private const string NORTH = "N";
     private const string SOUTH = "S";
@@ -11,8 +11,10 @@ public record Direction(string direction)
 
     public static Direction Create(string directionEncoding)
     {
-        if (directionEncoding.Equals(NORTH)) return new North(); 
-        return new Direction(directionEncoding);
+        if (directionEncoding.Equals(NORTH)) return new North();
+        if (directionEncoding.Equals(SOUTH)) return new South();
+        if (directionEncoding.Equals(WEST)) return new West();
+        return new East();
     }
 
     private record North() : Direction(NORTH)
@@ -20,6 +22,30 @@ public record Direction(string direction)
         public override Direction RotateRoverLeft()
         {
             return Create(WEST);
+        }
+    }
+
+    private record South() : Direction(SOUTH)
+    {
+        public override Direction RotateRoverLeft()
+        {
+            return Create(EAST);
+        }
+    }
+
+    private record East() : Direction(EAST)
+    {
+        public override Direction RotateRoverLeft()
+        {
+            return Create(NORTH);
+        }
+    }
+
+    private record West() : Direction(WEST)
+    {
+        public override Direction RotateRoverLeft()
+        {
+            return Create(SOUTH);
         }
     }
 
@@ -38,23 +64,5 @@ public record Direction(string direction)
         return direction.Equals(NORTH);
     }
 
-    public virtual Direction RotateRoverLeft()
-    {
-        if (IsFacingNorth())
-        {
-            throw new NotImplementedException();
-        }
-
-        if (IsFacingSouth())
-        {
-            return Create(EAST);
-        }
-
-        if (IsFacingWest())
-        {
-            return Create(SOUTH);
-        }
-
-        return Create(NORTH);
-    }
+    public abstract Direction RotateRoverLeft();
 }
