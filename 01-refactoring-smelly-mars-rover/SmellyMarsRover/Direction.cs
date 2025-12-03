@@ -1,15 +1,26 @@
+using System;
+
 namespace SmellyMarsRover;
 
 public record Direction(string direction)
 {
-    private const string WEST = "W";
-    private const string EAST = "E";
-    private const string SOUTH = "S";
     private const string NORTH = "N";
+    private const string SOUTH = "S";
+    private const string EAST = "E";
+    private const string WEST = "W";
 
-    public static Direction Create(string direction)
+    public static Direction Create(string directionEncoding)
     {
-        return new Direction(direction);
+        if (directionEncoding.Equals(NORTH)) return new North(); 
+        return new Direction(directionEncoding);
+    }
+
+    private record North() : Direction(NORTH)
+    {
+        public override Direction RotateRoverLeft()
+        {
+            return Create(WEST);
+        }
     }
 
     public bool IsFacingWest()
@@ -27,11 +38,11 @@ public record Direction(string direction)
         return direction.Equals(NORTH);
     }
 
-    public Direction RotateRoverLeft()
+    public virtual Direction RotateRoverLeft()
     {
         if (IsFacingNorth())
         {
-            return Create(WEST);
+            throw new NotImplementedException();
         }
 
         if (IsFacingSouth())
