@@ -24,7 +24,7 @@ namespace SmellyMarsRover
                     _direction = _direction.RotateRoverLeft();
                 }
                 else if (command.Equals("r")) {
-                    _direction = RotateRight();
+                    _direction = _direction.RotateRight();
                 }
                 else
                 {
@@ -56,25 +56,6 @@ namespace SmellyMarsRover
                     }
                 }
             }
-        }
-
-        private Direction RotateRight() {
-            if (_direction.IsFacingNorth())
-            {
-                return Direction.Create("E");
-            }
-
-            if (_direction.IsFacingSouth())
-            {
-                return Direction.Create("W");
-            }
-
-            if (_direction.IsFacingWest())
-            {
-                return Direction.Create("N");
-            }
-
-            return Direction.Create("S");
         }
 
         public override bool Equals(object obj)

@@ -63,4 +63,23 @@ public abstract record Direction(string direction)
     }
 
     public abstract Direction RotateRoverLeft();
+
+    public Direction RotateRight() {
+        if (IsFacingNorth())
+        {
+            return Create("E");
+        }
+
+        if (IsFacingSouth())
+        {
+            return Create("W");
+        }
+
+        if (IsFacingWest())
+        {
+            return Create("N");
+        }
+
+        return Create("S");
+    }
 }
