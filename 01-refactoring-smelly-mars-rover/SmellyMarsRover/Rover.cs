@@ -38,29 +38,9 @@ namespace SmellyMarsRover
 
                     var displacement = displacement1;
 
-                    _coordinates = Displace(_coordinates, displacement);
+                    _coordinates = _direction.Displace(_coordinates, displacement);
                 }
             }
-        }
-
-        private Coordinates Displace(Coordinates coordinates, int displacement) {
-            if (_direction.IsFacingNorth()) {
-                coordinates = coordinates.DisplaceAlongYAxis(displacement);
-            }
-            else if (_direction.IsFacingSouth())
-            {
-                coordinates = coordinates.DisplaceAlongYAxis(-displacement);
-            }
-            else if (_direction.IsFacingWest())
-            {
-                coordinates = coordinates.DisplaceAlongXAxis(-displacement);
-            }
-            else
-            {
-                coordinates = coordinates.DisplaceAlongXAxis(displacement);
-            }
-
-            return coordinates;
         }
 
         public override bool Equals(object obj)

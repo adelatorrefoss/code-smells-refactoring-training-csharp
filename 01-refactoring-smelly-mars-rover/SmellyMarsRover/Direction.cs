@@ -80,4 +80,24 @@ public abstract record Direction(string direction)
 
     public abstract Direction RotateRoverLeft();
     public abstract Direction RotateRight();
+
+    public Coordinates Displace(Coordinates coordinates, int displacement) {
+        if (this.IsFacingNorth()) {
+            coordinates = coordinates.DisplaceAlongYAxis(displacement);
+        }
+        else if (this.IsFacingSouth())
+        {
+            coordinates = coordinates.DisplaceAlongYAxis(-displacement);
+        }
+        else if (this.IsFacingWest())
+        {
+            coordinates = coordinates.DisplaceAlongXAxis(-displacement);
+        }
+        else
+        {
+            coordinates = coordinates.DisplaceAlongXAxis(displacement);
+        }
+
+        return coordinates;
+    }
 }

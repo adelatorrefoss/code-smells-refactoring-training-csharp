@@ -1,6 +1,6 @@
 namespace SmellyMarsRover;
 
-internal record Coordinates(int X, int Y)
+public record Coordinates(int X, int Y)
 {
     public Coordinates DisplaceAlongYAxis(int displacement)
     {
