@@ -21,23 +21,7 @@ namespace SmellyMarsRover
 
                 if (command.Equals("l"))
                 {
-                    // Rotate Rover to the left
-                    if (_direction.IsFacingNorth())
-                    {
-                        _direction = Direction.Create("W");
-                    }
-                    else if (_direction.IsFacingSouth())
-                    {
-                        _direction = Direction.Create("E");
-                    }
-                    else if (_direction.IsFacingWest())
-                    {
-                        _direction = Direction.Create("S");
-                    }
-                    else
-                    {
-                        _direction = Direction.Create("N");
-                    }
+                    _direction = _direction.RotateRoverLeft();
                 }
                 else if (command.Equals("r"))
                 {

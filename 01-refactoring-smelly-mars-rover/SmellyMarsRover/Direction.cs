@@ -21,4 +21,24 @@ public record Direction(string direction)
     {
         return direction.Equals("N");
     }
+
+    public Direction RotateRoverLeft()
+    {
+        if (IsFacingNorth())
+        {
+            return Create("W");
+        }
+
+        if (IsFacingSouth())
+        {
+            return Create("E");
+        }
+
+        if (IsFacingWest())
+        {
+            return Create("S");
+        }
+
+        return Create("N");
+    }
 }
