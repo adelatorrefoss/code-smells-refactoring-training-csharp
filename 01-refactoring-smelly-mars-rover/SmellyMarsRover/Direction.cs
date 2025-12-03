@@ -1,6 +1,6 @@
 namespace SmellyMarsRover;
 
-public abstract record Direction(string direction) {
+public abstract record Direction() {
     private const string NORTH = "N";
     private const string SOUTH = "S";
     private const string EAST = "E";
@@ -15,8 +15,12 @@ public abstract record Direction(string direction) {
             return new West();
         return new East();
     }
+    
+    public abstract Direction RotateRoverLeft();
+    public abstract Direction RotateRight();
+    public abstract Coordinates Displace(Coordinates coordinates, int displacement);
 
-    private record North() : Direction(NORTH) {
+    private record North() : Direction() {
         public override Direction RotateRoverLeft() {
             return Create(WEST);
         }
@@ -30,7 +34,7 @@ public abstract record Direction(string direction) {
         }
     }
 
-    private record South() : Direction(SOUTH) {
+    private record South() : Direction() {
         public override Direction RotateRoverLeft() {
             return Create(EAST);
         }
@@ -44,7 +48,7 @@ public abstract record Direction(string direction) {
         }
     }
 
-    private record East() : Direction(EAST) {
+    private record East() : Direction() {
         public override Direction RotateRoverLeft() {
             return Create(NORTH);
         }
@@ -58,7 +62,7 @@ public abstract record Direction(string direction) {
         }
     }
 
-    private record West() : Direction(WEST) {
+    private record West() : Direction() {
         public override Direction RotateRoverLeft() {
             return Create(SOUTH);
         }
@@ -71,8 +75,4 @@ public abstract record Direction(string direction) {
             return coordinates.DisplaceAlongXAxis(-displacement);
         }
     }
-
-    public abstract Direction RotateRoverLeft();
-    public abstract Direction RotateRight();
-    public abstract Coordinates Displace(Coordinates coordinates, int displacement);
 }
