@@ -9,7 +9,7 @@ namespace SmellyMarsRover
 
         public Rover(int x, int y, string direction)
         {
-            _direction = new Direction(direction);
+            _direction = Direction.Create(direction);
             _coordinates = new Coordinates(x, y);
         }
 
@@ -24,19 +24,19 @@ namespace SmellyMarsRover
                     // Rotate Rover to the left
                     if (_direction.IsFacingNorth())
                     {
-                        _direction = new Direction("W");
+                        _direction = Direction.Create("W");
                     }
                     else if (_direction.IsFacingSouth())
                     {
-                        _direction = new Direction("E");
+                        _direction = Direction.Create("E");
                     }
                     else if (_direction.IsFacingWest())
                     {
-                        _direction = new Direction("S");
+                        _direction = Direction.Create("S");
                     }
                     else
                     {
-                        _direction = new Direction("N");
+                        _direction = Direction.Create("N");
                     }
                 }
                 else if (command.Equals("r"))
@@ -44,19 +44,19 @@ namespace SmellyMarsRover
                     // Rotate Rover to the right
                     if (_direction.IsFacingNorth())
                     {
-                        _direction = new Direction("E");
+                        _direction = Direction.Create("E");
                     }
                     else if (_direction.IsFacingSouth())
                     {
-                        _direction = new Direction("W");
+                        _direction = Direction.Create("W");
                     }
                     else if (_direction.IsFacingWest())
                     {
-                        _direction = new Direction("N");
+                        _direction = Direction.Create("N");
                     }
                     else
                     {
-                        _direction = new Direction("S");
+                        _direction = Direction.Create("S");
                     }
                 }
                 else

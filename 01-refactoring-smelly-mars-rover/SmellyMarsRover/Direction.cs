@@ -2,6 +2,11 @@ namespace SmellyMarsRover;
 
 public record Direction(string direction)
 {
+    public static Direction Create(string direction)
+    {
+        return new Direction(direction);
+    }
+
     public bool IsFacingWest()
     {
         return direction.Equals("W");
