@@ -72,18 +72,6 @@ public abstract record Direction(string direction) {
         }
     }
 
-    public bool IsFacingWest() {
-        return direction.Equals(WEST);
-    }
-
-    public bool IsFacingSouth() {
-        return direction.Equals(SOUTH);
-    }
-
-    public bool IsFacingNorth() {
-        return direction.Equals(NORTH);
-    }
-
     public abstract Direction RotateRoverLeft();
     public abstract Direction RotateRight();
     public abstract Coordinates Displace(Coordinates coordinates, int displacement);
