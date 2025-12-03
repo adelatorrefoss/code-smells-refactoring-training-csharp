@@ -16,12 +16,12 @@ public abstract record Direction() {
         return new East();
     }
     
-    public abstract Direction RotateRoverLeft();
+    public abstract Direction RotateLeft();
     public abstract Direction RotateRight();
     public abstract Coordinates Displace(Coordinates coordinates, int displacement);
 
     private record North() : Direction() {
-        public override Direction RotateRoverLeft() {
+        public override Direction RotateLeft() {
             return Create(WEST);
         }
 
@@ -35,7 +35,7 @@ public abstract record Direction() {
     }
 
     private record South() : Direction() {
-        public override Direction RotateRoverLeft() {
+        public override Direction RotateLeft() {
             return Create(EAST);
         }
 
@@ -49,7 +49,7 @@ public abstract record Direction() {
     }
 
     private record East() : Direction() {
-        public override Direction RotateRoverLeft() {
+        public override Direction RotateLeft() {
             return Create(NORTH);
         }
 
@@ -63,7 +63,7 @@ public abstract record Direction() {
     }
 
     private record West() : Direction() {
-        public override Direction RotateRoverLeft() {
+        public override Direction RotateLeft() {
             return Create(SOUTH);
         }
 

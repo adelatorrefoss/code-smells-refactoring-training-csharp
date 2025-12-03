@@ -21,7 +21,7 @@ namespace SmellyMarsRover
 
                 if (command.Equals("l"))
                 {
-                    _direction = _direction.RotateRoverLeft();
+                    _direction = _direction.RotateLeft();
                 }
                 else if (command.Equals("r")) {
                     _direction = _direction.RotateRight();
