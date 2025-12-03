@@ -23,25 +23,8 @@ namespace SmellyMarsRover
                 {
                     _direction = _direction.RotateRoverLeft();
                 }
-                else if (command.Equals("r"))
-                {
-                    // Rotate Rover to the right
-                    if (_direction.IsFacingNorth())
-                    {
-                        _direction = Direction.Create("E");
-                    }
-                    else if (_direction.IsFacingSouth())
-                    {
-                        _direction = Direction.Create("W");
-                    }
-                    else if (_direction.IsFacingWest())
-                    {
-                        _direction = Direction.Create("N");
-                    }
-                    else
-                    {
-                        _direction = Direction.Create("S");
-                    }
+                else if (command.Equals("r")) {
+                    _direction = RotateRight();
                 }
                 else
                 {
@@ -73,6 +56,29 @@ namespace SmellyMarsRover
                     }
                 }
             }
+        }
+
+        private Direction RotateRight() {
+            Direction fasfass;
+            // Rotate Rover to the right
+            if (_direction.IsFacingNorth())
+            {
+                fasfass = Direction.Create("E");
+            }
+            else if (_direction.IsFacingSouth())
+            {
+                fasfass = Direction.Create("W");
+            }
+            else if (_direction.IsFacingWest())
+            {
+                fasfass = Direction.Create("N");
+            }
+            else
+            {
+                fasfass = Direction.Create("S");
+            }
+
+            return fasfass;
         }
 
         public override bool Equals(object obj)
