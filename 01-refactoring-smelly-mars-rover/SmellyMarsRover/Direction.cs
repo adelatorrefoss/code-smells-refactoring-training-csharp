@@ -1,24 +1,23 @@
 namespace SmellyMarsRover;
 
-public abstract record Direction(string direction)
-{
+public abstract record Direction(string direction) {
     private const string NORTH = "N";
     private const string SOUTH = "S";
     private const string EAST = "E";
     private const string WEST = "W";
 
-    public static Direction Create(string directionEncoding)
-    {
-        if (directionEncoding.Equals(NORTH)) return new North();
-        if (directionEncoding.Equals(SOUTH)) return new South();
-        if (directionEncoding.Equals(WEST)) return new West();
+    public static Direction Create(string directionEncoding) {
+        if (directionEncoding.Equals(NORTH))
+            return new North();
+        if (directionEncoding.Equals(SOUTH))
+            return new South();
+        if (directionEncoding.Equals(WEST))
+            return new West();
         return new East();
     }
 
-    private record North() : Direction(NORTH)
-    {
-        public override Direction RotateRoverLeft()
-        {
+    private record North() : Direction(NORTH) {
+        public override Direction RotateRoverLeft() {
             return Create(WEST);
         }
 
@@ -27,10 +26,8 @@ public abstract record Direction(string direction)
         }
     }
 
-    private record South() : Direction(SOUTH)
-    {
-        public override Direction RotateRoverLeft()
-        {
+    private record South() : Direction(SOUTH) {
+        public override Direction RotateRoverLeft() {
             return Create(EAST);
         }
 
@@ -39,10 +36,8 @@ public abstract record Direction(string direction)
         }
     }
 
-    private record East() : Direction(EAST)
-    {
-        public override Direction RotateRoverLeft()
-        {
+    private record East() : Direction(EAST) {
+        public override Direction RotateRoverLeft() {
             return Create(NORTH);
         }
 
@@ -51,10 +46,8 @@ public abstract record Direction(string direction)
         }
     }
 
-    private record West() : Direction(WEST)
-    {
-        public override Direction RotateRoverLeft()
-        {
+    private record West() : Direction(WEST) {
+        public override Direction RotateRoverLeft() {
             return Create(SOUTH);
         }
 
@@ -63,18 +56,15 @@ public abstract record Direction(string direction)
         }
     }
 
-    public bool IsFacingWest()
-    {
+    public bool IsFacingWest() {
         return direction.Equals(WEST);
     }
 
-    public bool IsFacingSouth()
-    {
+    public bool IsFacingSouth() {
         return direction.Equals(SOUTH);
     }
 
-    public bool IsFacingNorth()
-    {
+    public bool IsFacingNorth() {
         return direction.Equals(NORTH);
     }
 
@@ -82,22 +72,18 @@ public abstract record Direction(string direction)
     public abstract Direction RotateRight();
 
     public Coordinates Displace(Coordinates coordinates, int displacement) {
-        if (this.IsFacingNorth()) {
-            coordinates = coordinates.DisplaceAlongYAxis(displacement);
-        }
-        else if (this.IsFacingSouth())
-        {
-            coordinates = coordinates.DisplaceAlongYAxis(-displacement);
-        }
-        else if (this.IsFacingWest())
-        {
-            coordinates = coordinates.DisplaceAlongXAxis(-displacement);
-        }
-        else
-        {
-            coordinates = coordinates.DisplaceAlongXAxis(displacement);
+        if (IsFacingNorth()) {
+            return coordinates.DisplaceAlongYAxis(displacement);
         }
 
-        return coordinates;
+        if (IsFacingSouth()) {
+            return coordinates.DisplaceAlongYAxis(-displacement);
+        }
+
+        if (IsFacingWest()) {
+            return coordinates.DisplaceAlongXAxis(-displacement);
+        }
+
+        return coordinates.DisplaceAlongXAxis(displacement);
     }
 }
