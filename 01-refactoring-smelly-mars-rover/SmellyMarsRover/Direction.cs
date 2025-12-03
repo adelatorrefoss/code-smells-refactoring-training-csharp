@@ -24,6 +24,10 @@ public abstract record Direction(string direction) {
         public override Direction RotateRight() {
             return Create(EAST);
         }
+
+        public override Coordinates Displace(Coordinates coordinates, int displacement) {
+            return coordinates.DisplaceAlongYAxis(displacement);
+        }
     }
 
     private record South() : Direction(SOUTH) {
@@ -33,6 +37,10 @@ public abstract record Direction(string direction) {
 
         public override Direction RotateRight() {
             return Create(WEST);
+        }
+
+        public override Coordinates Displace(Coordinates coordinates, int displacement) {
+            return coordinates.DisplaceAlongYAxis(-displacement);
         }
     }
 
@@ -44,6 +52,10 @@ public abstract record Direction(string direction) {
         public override Direction RotateRight() {
             return Create(SOUTH);
         }
+
+        public override Coordinates Displace(Coordinates coordinates, int displacement) {
+            return coordinates.DisplaceAlongXAxis(displacement);
+        }
     }
 
     private record West() : Direction(WEST) {
@@ -53,6 +65,10 @@ public abstract record Direction(string direction) {
 
         public override Direction RotateRight() {
             return Create(NORTH);
+        }
+
+        public override Coordinates Displace(Coordinates coordinates, int displacement) {
+            return coordinates.DisplaceAlongXAxis(-displacement);
         }
     }
 
@@ -70,20 +86,5 @@ public abstract record Direction(string direction) {
 
     public abstract Direction RotateRoverLeft();
     public abstract Direction RotateRight();
-
-    public Coordinates Displace(Coordinates coordinates, int displacement) {
-        if (IsFacingNorth()) {
-            return coordinates.DisplaceAlongYAxis(displacement);
-        }
-
-        if (IsFacingSouth()) {
-            return coordinates.DisplaceAlongYAxis(-displacement);
-        }
-
-        if (IsFacingWest()) {
-            return coordinates.DisplaceAlongXAxis(-displacement);
-        }
-
-        return coordinates.DisplaceAlongXAxis(displacement);
-    }
+    public abstract Coordinates Displace(Coordinates coordinates, int displacement);
 }
