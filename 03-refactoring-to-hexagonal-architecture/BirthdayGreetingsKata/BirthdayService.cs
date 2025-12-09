@@ -24,7 +24,15 @@ public class FileEmployeeRepository {
 
 public class BirthdayService
 {
-    private readonly FileEmployeeRepository fileEmployeeRepository = new FileEmployeeRepository();
+    private readonly FileEmployeeRepository fileEmployeeRepository;
+
+    public BirthdayService() {
+        fileEmployeeRepository = new FileEmployeeRepository();
+    }
+    
+    public BirthdayService(FileEmployeeRepository fileEmployeeRepository) {
+        this.fileEmployeeRepository = fileEmployeeRepository;
+    }
 
     public void SendGreetings(string fileName, OurDate ourDate,
         string smtpHost, int smtpPort) {
