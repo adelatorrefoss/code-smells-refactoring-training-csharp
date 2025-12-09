@@ -17,8 +17,9 @@ public class FileEmployeeRepository : EmployeeRepository {
         var employees = new List<Employee>();
         while ((str = reader.ReadLine()) != null) {
             var employeeData = str.Split(", ");
-            var employee = new Employee(employeeData[1], employeeData[0],
-                    employeeData[2], employeeData[3]);
+            string birthDate = employeeData[2];
+            var employee = new Employee(employeeData[1], employeeData[0], employeeData[3],
+                    new OurDate(birthDate));
             employees.Add(employee);
         }
 

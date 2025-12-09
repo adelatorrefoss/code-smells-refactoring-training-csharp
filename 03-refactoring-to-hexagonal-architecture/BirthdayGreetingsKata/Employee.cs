@@ -9,12 +9,13 @@ public class Employee
     public string FirstName { get; }
     public string Email { get; }
 
-    public Employee(string firstName, string lastName, string birthDate,
-        string email)
+    public Employee(string firstName, string lastName,
+        string email,
+        OurDate birthday)
     {
         FirstName = firstName;
         _lastName = lastName;
-        _birthDate = new OurDate(birthDate);
+        _birthDate = birthday;
         Email = email;
     }
 
