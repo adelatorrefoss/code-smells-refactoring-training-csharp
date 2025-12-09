@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Net.Mail;
 
@@ -7,15 +8,28 @@ namespace BirthdayGreetingsKata;
 public class BirthdayService
 {
     public void SendGreetings(string fileName, OurDate ourDate,
-        string smtpHost, int smtpPort)
-    {
+        string smtpHost, int smtpPort) {
+        var employees = GetEmployees(fileName);
+
+        foreach (var employee in employees)
+        {
+            GreetEmployee(ourDate, smtpHost, smtpPort, employee);
+        }
+    }
+
+    private static List<Employee> GetEmployees(string fileName) {
         using var reader = new StreamReader(fileName);
         var str = "";
         str = reader.ReadLine(); // skip header
+        var employees = new List<Employee>();
         while ((str = reader.ReadLine()) != null) {
-            var employee = ToEmployee(str);
-            GreetEmployee(ourDate, smtpHost, smtpPort, employee);
+            var employeeData = str.Split(", ");
+            var employee = new Employee(employeeData[1], employeeData[0],
+                    employeeData[2], employeeData[3]);
+            employees.Add(employee);
         }
+
+        return employees;
     }
 
     private void GreetEmployee(OurDate ourDate, string smtpHost, int smtpPort, Employee employee) {
@@ -28,13 +42,6 @@ public class BirthdayService
             SendMessage(smtpHost, smtpPort, "sender@here.com", subject,
                     body, recipient);
         }
-    }
-
-    private static Employee ToEmployee(string str) {
-        var employeeData = str.Split(", ");
-        var employee = new Employee(employeeData[1], employeeData[0],
-                employeeData[2], employeeData[3]);
-        return employee;
     }
 
     private void SendMessage(string smtpHost, int smtpPort, string sender,
