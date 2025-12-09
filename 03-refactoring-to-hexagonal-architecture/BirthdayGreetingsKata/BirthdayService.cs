@@ -5,19 +5,8 @@ using System.Net.Mail;
 
 namespace BirthdayGreetingsKata;
 
-public class BirthdayService
-{
-    public void SendGreetings(string fileName, OurDate ourDate,
-        string smtpHost, int smtpPort) {
-        var employees = GetEmployees(fileName);
-
-        foreach (var employee in employees)
-        {
-            GreetEmployee(ourDate, smtpHost, smtpPort, employee);
-        }
-    }
-
-    private static List<Employee> GetEmployees(string fileName) {
+public class FileEmployeeRepository {
+    public List<Employee> GetEmployees(string fileName) {
         using var reader = new StreamReader(fileName);
         var str = "";
         str = reader.ReadLine(); // skip header
@@ -30,6 +19,21 @@ public class BirthdayService
         }
 
         return employees;
+    }
+}
+
+public class BirthdayService
+{
+    private readonly FileEmployeeRepository fileEmployeeRepository = new FileEmployeeRepository();
+
+    public void SendGreetings(string fileName, OurDate ourDate,
+        string smtpHost, int smtpPort) {
+        var employees = fileEmployeeRepository.GetEmployees(fileName);
+
+        foreach (var employee in employees)
+        {
+            GreetEmployee(ourDate, smtpHost, smtpPort, employee);
+        }
     }
 
     private void GreetEmployee(OurDate ourDate, string smtpHost, int smtpPort, Employee employee) {
