@@ -10,7 +10,7 @@ public class FileEmployeeRepository : EmployeeRepository {
         this.fileName = fileName;
     }
 
-    public List<Employee> GetEmployees() {
+    public List<Employee> Get() {
         using var reader = new StreamReader(fileName);
         var str = "";
         str = reader.ReadLine(); // skip header

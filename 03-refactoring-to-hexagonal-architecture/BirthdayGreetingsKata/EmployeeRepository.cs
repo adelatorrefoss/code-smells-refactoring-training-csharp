@@ -3,5 +3,5 @@
 namespace BirthdayGreetingsKata;
 
 public interface EmployeeRepository {
-    List<Employee> GetEmployees();
+    List<Employee> Get();
 }

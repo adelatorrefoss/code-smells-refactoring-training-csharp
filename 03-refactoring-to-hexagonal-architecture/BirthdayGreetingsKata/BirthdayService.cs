@@ -13,7 +13,7 @@ public class BirthdayService
 
     public void SendGreetings(OurDate ourDate,
         string smtpHost, int smtpPort) {
-        var employees = fileEmployeeRepository.GetEmployees();
+        var employees = fileEmployeeRepository.Get();
 
         foreach (var employee in employees)
         {
