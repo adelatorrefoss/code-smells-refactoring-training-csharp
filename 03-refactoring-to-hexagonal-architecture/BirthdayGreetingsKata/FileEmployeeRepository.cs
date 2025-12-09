@@ -4,7 +4,13 @@ using System.IO;
 namespace BirthdayGreetingsKata;
 
 public class FileEmployeeRepository {
-    public List<Employee> GetEmployees(string fileName) {
+    private readonly string fileName;
+
+    public FileEmployeeRepository(string fileName) {
+        this.fileName = fileName;
+    }
+
+    public List<Employee> GetEmployees() {
         using var reader = new StreamReader(fileName);
         var str = "";
         str = reader.ReadLine(); // skip header
