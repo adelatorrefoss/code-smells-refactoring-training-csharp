@@ -14,7 +14,7 @@ public class AcceptanceTest
     {
         private readonly List<MailMessage> _messages;
 
-        public BirthdayServiceForTesting(List<MailMessage> messages) : base(new FileEmployeeRepository("employee_data.txt"))
+        public BirthdayServiceForTesting(List<MailMessage> messages, EmployeeRepository employeeRepository) : base(employeeRepository)
         {
             _messages = messages;
         }
@@ -29,7 +29,7 @@ public class AcceptanceTest
     public void SetUp()
     {
         _messagesSent = new List<MailMessage>();
-        _service = new BirthdayServiceForTesting(_messagesSent);
+        _service = new BirthdayServiceForTesting(_messagesSent, new FileEmployeeRepository("employee_data.txt"));
     }
 
     [Test]
