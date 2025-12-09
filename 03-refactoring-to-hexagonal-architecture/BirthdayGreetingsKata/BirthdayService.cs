@@ -11,7 +11,7 @@ public class BirthdayService
         this.fileEmployeeRepository = fileEmployeeRepository;
     }
 
-    public void SendGreetings(string fileName, OurDate ourDate,
+    public void SendGreetings(OurDate ourDate,
         string smtpHost, int smtpPort) {
         var employees = fileEmployeeRepository.GetEmployees();
 
@@ -66,8 +66,7 @@ public class BirthdayService
         var service = new BirthdayService(new FileEmployeeRepository("employee_data.txt"));
         try
         {
-            service.SendGreetings("employee_data.txt",
-                new OurDate("2008/10/08"), "localhost", 25);
+            service.SendGreetings(new OurDate("2008/10/08"), "localhost", 25);
         }
         catch (Exception e)
         {
