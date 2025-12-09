@@ -3,7 +3,7 @@ using System.IO;
 
 namespace BirthdayGreetingsKata;
 
-public class FileEmployeeRepository {
+public class FileEmployeeRepository : EmployeeRepository {
     public List<Employee> GetEmployees(string fileName) {
         using var reader = new StreamReader(fileName);
         var str = "";

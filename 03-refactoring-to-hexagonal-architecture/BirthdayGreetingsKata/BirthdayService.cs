@@ -5,15 +5,15 @@ namespace BirthdayGreetingsKata;
 
 public class BirthdayService
 {
-    private readonly FileEmployeeRepository fileEmployeeRepository;
+    private readonly EmployeeRepository employeeRepository;
 
-    public BirthdayService(FileEmployeeRepository fileEmployeeRepository) {
-        this.fileEmployeeRepository = fileEmployeeRepository;
+    public BirthdayService(EmployeeRepository employeeRepository) {
+        this.employeeRepository = employeeRepository;
     }
 
     public void SendGreetings(string fileName, OurDate ourDate,
         string smtpHost, int smtpPort) {
-        var employees = fileEmployeeRepository.GetEmployees(fileName);
+        var employees = employeeRepository.GetEmployees(fileName);
 
         foreach (var employee in employees)
         {
