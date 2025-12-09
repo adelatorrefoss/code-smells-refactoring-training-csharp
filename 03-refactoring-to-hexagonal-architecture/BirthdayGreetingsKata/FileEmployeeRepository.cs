@@ -18,13 +18,16 @@ public class FileEmployeeRepository : EmployeeRepository {
         reader.ReadLine(); // skip header
         var employees = new List<Employee>();
         while (reader.ReadLine() is { } str) {
-            var employeeData = str.Split(", ");
-            var birthday = DateTime.ParseExact(employeeData[2], FORMAT, null);
-            var employee = new Employee(employeeData[1], employeeData[0], employeeData[3],
-                    new OurDate(birthday));
-            employees.Add(employee);
+            employees.Add(ToEmployee(str));
         }
 
         return employees;
+    }
+
+    private static Employee ToEmployee(string str) {
+        var employeeData = str.Split(", ");
+        var birthday = DateTime.ParseExact(employeeData[2], FORMAT, null);
+        return new Employee(employeeData[1], employeeData[0], employeeData[3],
+                new OurDate(birthday));
     }
 }
