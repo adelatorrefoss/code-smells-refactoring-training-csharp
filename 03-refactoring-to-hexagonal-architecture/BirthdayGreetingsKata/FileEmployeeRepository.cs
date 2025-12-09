@@ -15,10 +15,9 @@ public class FileEmployeeRepository : EmployeeRepository {
 
     public List<Employee> Get() {
         using var reader = new StreamReader(fileName);
-        var str = "";
-        str = reader.ReadLine(); // skip header
+        reader.ReadLine(); // skip header
         var employees = new List<Employee>();
-        while ((str = reader.ReadLine()) != null) {
+        while (reader.ReadLine() is { } str) {
             var employeeData = str.Split(", ");
             var birthday = DateTime.ParseExact(employeeData[2], FORMAT, null);
             var employee = new Employee(employeeData[1], employeeData[0], employeeData[3],
