@@ -12,21 +12,29 @@ public class BirthdayService
         using var reader = new StreamReader(fileName);
         var str = "";
         str = reader.ReadLine(); // skip header
-        while ((str = reader.ReadLine()) != null)
-        {
-            var employeeData = str.Split(", ");
-            var employee = new Employee(employeeData[1], employeeData[0],
-                employeeData[2], employeeData[3]);
-            if (employee.IsBirthday(ourDate))
-            {
-                var recipient = employee.Email;
-                var body = "Happy Birthday, dear %NAME%!".Replace("%NAME%",
-                    employee.FirstName);
-                var subject = "Happy Birthday!";
-                SendMessage(smtpHost, smtpPort, "sender@here.com", subject,
-                    body, recipient);
-            }
+        while ((str = reader.ReadLine()) != null) {
+            var employee = ToEmployee(str);
+            GreetEmployee(ourDate, smtpHost, smtpPort, employee);
         }
+    }
+
+    private void GreetEmployee(OurDate ourDate, string smtpHost, int smtpPort, Employee employee) {
+        if (employee.IsBirthday(ourDate))
+        {
+            var recipient = employee.Email;
+            var body = "Happy Birthday, dear %NAME%!".Replace("%NAME%",
+                    employee.FirstName);
+            var subject = "Happy Birthday!";
+            SendMessage(smtpHost, smtpPort, "sender@here.com", subject,
+                    body, recipient);
+        }
+    }
+
+    private static Employee ToEmployee(string str) {
+        var employeeData = str.Split(", ");
+        var employee = new Employee(employeeData[1], employeeData[0],
+                employeeData[2], employeeData[3]);
+        return employee;
     }
 
     private void SendMessage(string smtpHost, int smtpPort, string sender,
