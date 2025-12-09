@@ -11,8 +11,7 @@ public class BirthdayService
         this.employeeRepository = employeeRepository;
     }
 
-    public void SendGreetings(OurDate ourDate,
-        string smtpHost, int smtpPort) {
+    public void SendGreetings(OurDate ourDate, string smtpHost, int smtpPort) {
         var employees = employeeRepository.Get();
 
         foreach (var employee in employees)
