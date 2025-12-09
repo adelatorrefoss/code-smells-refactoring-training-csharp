@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace BirthdayGreetingsKata;
@@ -17,9 +18,9 @@ public class FileEmployeeRepository : EmployeeRepository {
         var employees = new List<Employee>();
         while ((str = reader.ReadLine()) != null) {
             var employeeData = str.Split(", ");
-            string birthDate = employeeData[2];
+            var birthday = DateTime.ParseExact(employeeData[2], "yyyy/MM/dd", null);
             var employee = new Employee(employeeData[1], employeeData[0], employeeData[3],
-                    new OurDate(birthDate));
+                    new OurDate(birthday));
             employees.Add(employee);
         }
 
