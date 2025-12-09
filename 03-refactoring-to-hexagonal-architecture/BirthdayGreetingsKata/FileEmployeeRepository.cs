@@ -3,7 +3,7 @@ using System.IO;
 
 namespace BirthdayGreetingsKata;
 
-public class FileEmployeeRepository {
+public class FileEmployeeRepository : EmployeeRepository {
     private readonly string fileName;
 
     public FileEmployeeRepository(string fileName) {
